@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { post: string } }) {
   const post = await loadPost(params.post + ".mdx");
   
   const Mdx = dynamic(
-    () => import(`${__dirname}/posts/${params.post}.mdx`)
+    () => import(`./posts/`+params.post+`.mdx`)
       .catch(() => import(`./missing.mdx`))
   )
   console.log(readingTime(post.content))
