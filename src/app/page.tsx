@@ -30,7 +30,7 @@ export default async function Home() {
       <section className="md:min-h-[600px] min-h-[400px] flex items-center">
         <div className="container">
           <div className="max-w-6xl">
-            <h1 className={`${barlow.className} md:text-5xl text-3xl leading-snug md:leading-snug `}>I'm an award winning <b className="opacity-100">web developer</b> from Oregon. I specialize in engineering <b className="opacity-100">event driven micro services</b> and <b className="opacity-100">react.js</b> applications.</h1>
+            <h1 className={`${barlow.className} md:text-5xl text-3xl leading-snug md:leading-snug `}>I&apos;m an award winning <b className="opacity-100">web developer</b> from Oregon. I specialize in engineering <b className="opacity-100">event driven micro services</b> and <b className="opacity-100">react.js</b> applications.</h1>
             <br />
             <h2 className="md:text-2xl md:mt-6 text-muted-foreground">I occasionally <a className="text-blue-400 hover:underline" href="https://twitter.com/nwpointer">tweet</a> and like to <a className="text-blue-400 hover:underline" href="/blog">blog.</a></h2>
           </div>
@@ -44,7 +44,7 @@ export default async function Home() {
               Im pragmatic, creative and care deeply about quality software - a passion I picked up when I was still in Highschool.
             </p>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              I love a good challenge and I find I'm often at my happiest when designing technical solutions to novel problems with an engaged and empowered team of peers.
+              I love a good challenge and I find I&apos;m often at my happiest when designing technical solutions to novel problems with an engaged and empowered team of peers.
             </p>
             <p className="text-muted-foreground mb-4 leading-relaxed">
               I live in Portand Oregon with my beautiful girlfriend and our cat Zelda
@@ -79,8 +79,8 @@ export default async function Home() {
               <a className="text-sm hover:underline" href="/">Rendering semi-realistic Landscapes in the browser</a>
               <div className="text-xs text-muted-foreground mb-2 mt-6">August 2021</div>
               <a className="text-sm hover:underline" href="/">Rendering semi-realistic Landscapes in the browser</a> */}
-              {posts.map(({ slug, data, excerpt }: any) =>
-                <div>
+              {posts.map(({ slug, data, excerpt }: any, i) =>
+                <div key={i}>
                   <div className="text-xs text-muted-foreground mb-2 mt-6">{format(new Date(data.publishedDate), 'MMMM do yyyy')}</div>
                   <Link className="text-sm hover:underline" href={`/blog/${slug}`}>{data.title} </Link>
                   {/* <p className="pb-8 text-sm opacity-50">

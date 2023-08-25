@@ -30,8 +30,8 @@ export default async function Home() {
           POSTS:
         </h1>
         <div className="md:grid grid-cols-2 gap-12">
-          {posts.map(({ slug, data, excerpt }: any) =>
-            <div>
+          {posts.map(({ slug, data, excerpt }: any, i) =>
+            <div key={i}>
               <div className="text-xs text-muted-foreground mb-2 mt-6">{format(new Date(data.publishedDate), 'MMMM do yyyy')}</div>
               <Link href={`/blog/${slug}`}>
                 <div className="block mb-2 text-xl" >

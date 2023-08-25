@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { post: string } }) {
   return (
     <section >
       <div className="container my-16 post">
-        {post.data.tags && post.data.tags.map(tag => <Topic>{tag}</Topic>)}
+        {post.data.tags && post.data.tags.map((tag:any,i:any) => <Topic key={i}>{tag}</Topic>)}
         <h1 className={`${barlow.className} text-3xl md:text-5xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
           {post.data.title}
         </h1>
