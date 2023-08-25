@@ -5,12 +5,14 @@ import { Barlow } from 'next/font/google'
 const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
 import { format } from 'date-fns'
 import readingTime from 'reading-time'
+import path from 'path';
 
 
 export default async function Page({ params }: { params: { post: string } }) {
   const post = await loadPost(params.post + ".mdx");
+  
   const Mdx = dynamic(
-    () => import(`./posts/${params.post}.mdx`)
+    () => import(`${__dirname}/posts/${params.post}.mdx`)
       .catch(() => import(`./missing.mdx`))
   )
   console.log(readingTime(post.content))
