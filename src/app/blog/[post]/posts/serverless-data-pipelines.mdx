@@ -1,0 +1,66 @@
+---
+title: Lessons learned building serverless data pipelines
+# subtitle: how to use custom shaders in three.js to improve visual fidelity dramatically
+publishedDate: 2020/04/13
+tags:
+  - Technique
+---
+
+<img className="rounded-xl w-full mb-4" src="/63a13ab3f687d7218cbba3f6_image-from-rawpixel-id-3283994-jpeg.jpg" />
+
+Before many of the cooler features of AI products can be productionalized you need high quality and correct data. Pulling data from across the enterprise can be a non trivial task if not given the proper consideration. Having built a couple serverless data pipelines I thought I'd share gotchas and lessons learned for others interested in building similar solutions.
+
+
+### What makes a good candidate for serverless data pipelining?
+One you have a hammer everything starts to look like a nail - before you begin its important to determine upfront wether or not your use case will benefit from a serverless approach. If the input to your pipeline is event driven ie you have some stream of data that can be be used to trigger your lambda you may want to look into a serverless approach. If you're doing traditional batch ETL or ELT lambda's 15 minute execution limit may get in your way.
+
+<b>Good inputs to serverless data pipelines:</b>
+- Any message or queueing system (sqs for example) are great
+- s3 (s3 file updates can easily be triggered to run lambdas)
+- any API that expose deltas or change sets can work
+
+<br />
+<b>Important lambda limits:</b>  
+- Lambdas can run for up to 15 minutes
+- Lambdas can run for up to 15 minutes
+- lambdas can use up to 3008mb memory. You may be able to restructure your job to work on smaller portions of your data set but don't necessarily go out of your way unless there some other compelling reason to go serverless.
+- Every aws account starts with a pool of 1000 concurrent executions. This is a soft limit but be aware and if you want to scale up concurrent executions, consider requesting an increase on this limit before release. Note that you can reserve concurrency to prevent other pipelines or applications causing you problems: [learn more here](https://itnext.io/the-everything-guide-to-lambda-throttling-reserved-concurrency-and-execution-limits-d64f144129e5)
+
+### Compare costs to traditional methods
+Serverless pipelines are easy to standup and can scale but if you have a particularly high volume / velocity you may want to do some price comparisons with more traditional methods. If you have consistently high compute resource requirements you can probably save money by not using lambdas. Consider airflow + containers or moving to aws batch for example.
+
+### Save copies
+This may sounds obvious to some but if you're doing any kind of data transformation save a copy of data you receive before applying any transformations. If you can't hold on to it forever set a time to live on s3 files or something comparable so when data quality questions come up you can quickly determine if its some upstream system or your pipeline thats causing the problem.
+
+### Make sure you're reporting errors correctly
+This ones kinda specific to node lambdas using async await but it can be really easy to swallow errors if you're not careful. Failing to do this can obviously make debugging harder and if you're subscribed to sqs queues this can be especially bad as unless an error is thrown or some other indication is given sqs will consume that message leading to data loss.
+
+### Logging
+By default lambda logs are available in cloud watch but if your searching for errors / debugging something you'll have a much better experience if you use Cloudwatch insights. Cloudwatch insights has search and some basic graphing tools similar to what you might get out of Kibana or other logging tools.
+
+### Don't forget about users right to forget (GDRP / CCPA)
+Your legal / audit team may show up eventually wanting to know how you handle user's right to be forgotten. Deleting all of a individuals identifiable information is much easier if its architect's for out of the box. Shimming it in to a system that was not designed for at the last minute it can easily create bugs or performance problems.
+
+### Take advantage of SQS
+AWS SQS and lambdas pair really well but if you haven't used SQS or similar systems before theres a couple gotchas:
+
+#### Beware of ordering / duplication
+using FIFO queues sqs can be configured to deliver messages exactly once in a specific order but this is not the default and has other implications.
+
+#### DLQs are your friend
+using dead letter queues are a great way to avoid data loss. If a sqs message is chronically undeliverable it can be automatically moved to a dead letter queue and from there be saved to s3 or picked up by some other remediation process.
+
+#### Back pressure mitigation
+After completing your processing its common a pipeline to want to persist data in to a database / data warehouse / call an api etc. Instead of directly delivering data this way consider placing records on a queue first. If your downstream dependency ever is unavailable having a queue in between will prevent data loss.
+
+```js
+ex: data transformation lambda -> sqs -> delivery lambda -> database
+```
+
+By setting a concurrency limit on your delivery lambda you can also easily throttle requests 
+and smooth out your demand on downstream systems assuming the incurred delay is acceptable.
+
+### Thanks!
+Serverless can be an incredible tool for building data pipelines but there are a couple of easily avoided problems that will catch you off guard if you don't address them upfront. I hope this has inspired you to look or experiment with building serverless data pipelines!
+
+If enjoyed the article let me know by commenting below and follow me on twitter to stay updated on all my latest content.

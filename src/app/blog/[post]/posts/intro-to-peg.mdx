@@ -1,0 +1,129 @@
+---
+title: Intro to Peg.js
+# subtitle: how to use custom shaders in three.js to improve visual fidelity dramatically
+publishedDate: 2020/04/11
+tags:
+  - Tutorial
+---
+
+<img className="rounded-xl w-full mb-4" src="/preview16.jpg" />
+
+
+PEG.js is a really neat javascript library that takes a PEG and generates a parser program that can be called directly from javascript. From their website:
+
+"PEG.js is a simple parser generator for JavaScript that produces fast parsers with excellent error reporting. You can use it to process complex data or computer languages and build transformers, interpreters, compilers and other tools easily." - peg.js docs.
+
+I'm planning on doing a full series on how to write a programming language using PEG.js so I thought I provide an introduction to PEG.js here for people who haven't used it before. Most people probably aren't writing language parsers on the regular though so Ill also talk about peg in the context of solving some problems one might also utilize regular expressions for. If you're here to learn about Peg specifically or are familiar with what a grammar is feel free to skip down to the getting started section.
+
+### motivating example: regex hell
+I feel most people have a love hate relationship with regular expressions. Writing complicated regex is almost always a bad idea as in my opinion it creates a huge readability problem for other developers or your future self. That said when used judiciously regex can obviously be exceeding useful.
+
+Finding files with grep for example is usually a great use case of regex. However there are somethings regex can't parse (eg. HTML) and then theres a even larger category of things that 
+[probably shouldn't be solved regex alone.](https://stackoverflow.com/questions/43269126/convert-regular-expression-to-pegjs-grammar)
+<img src="/you-shall-not-parse.jpg" alt=""/>
+
+<br/>
+
+If you find yourself wanting to write yet another unreadable regex maybe consider an alternative, PEGs for example.
+
+Being overly reductive PEGs are kinda like regex++. A Peg or Parser expression grammar is quite similar to a context free grammar and it allows you to compose together regex like rules into a larger parser. It does this in a declarative, recursive fashion.
+
+#### Wait whats a grammar?
+A grammar is a 'language of languages' in that it is a way of expressing what a language is. English for example has a grammar but it is a much looser type of grammar than a context free grammar. If you'd like to learn more Daniel Shiffman from The coding train does a great job describing [context free grammars](https://www.youtube.com/watch?v%253DRhqk9HYiB7Q). Pegs are very similar to context free grammars except they are non ambiguous ie for a given input there is exactly one valid way to parse it.
+
+Peg.js can be a great solution to 'regex hell' and can be used in the building of more sophisticated tools such as dsl parser, a custom query language or even new programming languages. I've been super interested in how language parsers work and I think its a great example so in this article we'll get introduced to PEG.JS and go over some basic challenges you might run into trying to parse a query language.
+
+### how to install / get started
+If you want to get started quickly and play around with PEG.js they have a really cool interactive editor online at https://pegjs.org/online although sadly theres no dark mode ;)
+
+The first section of their docs do a pretty good of showing you how to install and [setup peg on your machine](https://pegjs.org/documentation) but essentially just
+
+```js
+npm install -g pegjs
+```
+you then should be able to pass a valid pegjs grammar to the peg cli to generate a grammar:
+
+```bash
+pegjs hello.pegjs
+```
+
+... or if you need to generate a parser at run time:
+
+```js
+var peg = require("pegjs");
+var grammar = "start = ('a' / 'b')+";
+var parser = peg.generate(grammar);
+
+parser.parse("abba"); // returns ["a", "b", "b", "a"]
+```
+
+This generates a grammar that matches any number or a characters or b characters. eg: abb aabbbabab and bbbbbba would all parse but cabbbbabbbcccc would not.
+
+Note that with the addition of * or + the parser returns an array of single values that matched and unlike regular expressions we can use these quantity modifiers on rules as well:
+
+```js
+float = integer+ '.' integer+
+integer = [0-9]
+```
+
+### formatting
+One of the coolest features of Peg.js is the ability to use javascript adjacent to a rule to control its return value. It works by tagging a part of the expression with a variable name and appending a js function to the end of the rule like so:
+
+
+```js
+integer = digits:[0-9] { return digits.join() }
+// parsing '124' now returns '124' instead of ['1','2','4'],
+```
+
+### Or expression
+The or expression '/' is quite useful in rules. 
+```js
+number = float / integer / bigint / imaginary
+```
+
+To avoid ambiguity Peg resolved a rule to the first valid parser expression. Eg: if start=a/b and our input could match both a and b PEG.js will use a to parse the sub expression.
+
+### recursive definitions
+recursion has a couple of uses in peg.js. Firstly we can use it to describe nested or tree like structures such as HTML or JSON but we can also use it to describe flat lists of things - this is very similar to how functional languages such as haskell define lists in terms of recursive pairs of head & tail values:
+
+```js
+commaSeparatedIntegerList
+    = integer ',' commaSeparatedIntegerList
+    / integer
+integer = [0-9]
+```
+<br/>
+#### examples:
+
+parse: '1': it lacks a comma so the text can not match the first parser expression but it does match the second one (integer).
+
+parse '1,2' it matches the first expression 'consuming the 1, it then recursively tries to match the 2. 2 is a valid commaSeparatedIntegerList because it is a integer so 1,2 parses.
+
+this process can continue indefinitely or more accurately until the [stack overflows.](https://en.wikipedia.org/wiki/Stack_overflow)
+
+Putting everything together we can easily construct a poor mans json parser:
+
+
+
+```js
+object = "{" keyValueList? "}"
+keyValueList = keyValue ',' keyValueList / keyValue
+keyValue = key ":" value
+key = [a-zA-Z]+
+value = string / intArray / object
+string = "'"[a-zA-Z]+ "'"
+intArray
+    = '[' integer ',' intArray ']'
+    / integer
+integer = [0-9]+
+````
+
+This will successfully work on input such as `"{foo:'bar',fip:1,goo:1,a:{a:[1,2,3]}}"` but fails on some obviously valid inputs such as ones that include spaces or newlines between keys / values and will require some additional formatting to produce useful output, I'll leave that as an exercise for the reader.
+
+### Conclusion
+
+Syntactically comparing it to regex for a moment - sure it takes up more space but pegs are still fairly concise and allow us to:
+- name things and
+- recursively build up more complicated parsers.
+
+This lets you focus on smaller parts of the program at a time, reducing the overall demand places on your brain's working memory. I hope you'll agree that PEGs are an awesome tool for generating parsers and consider using them next time your looking to simplify a complex regular expression. Thanks so much for reading!
