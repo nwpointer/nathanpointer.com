@@ -26,32 +26,26 @@ export default async function RootLayout({ children, ...args }: { children: Reac
   if (!post) return null
   metadata.title = post.slug
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Page>
-            <section >
-              <div className="container my-16 post">
-                {post.data.tags && post.data.tags.map((tag: any, i: any) => <Topic key={i}>{tag}</Topic>)}
-                <h1 className={`${barlow.className} text-3xl md:text-5xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
-                  {post.data.title}
-                </h1>
-                {post.data.subtitle && (<h2 className={`${barlow.className} text-md md:text-xl mb-2 -mt-3  mb-6 opacity-75`}>
-                  {post.data.subtitle}
-                </h2>)}
-                <hr />
-                <div className="text-muted-forground opacity-50 my-6 text-xs">
-                  {format(new Date(post.data.publishedDate), 'MMMM do yyyy')} | ~{readingTime(post.content).text}
-                </div>
-                {/* <img src="/sample.jpg" className="rounded-xl" /> */}
-                <div className="content mt-8">
-                  {children}
-                </div>
-              </div>
-            </section>
-          </Page>
-        </ThemeProvider>
-      </body>
-    </html>
+    <Page>
+      <section >
+        <div className="container my-16 post">
+          {post.data.tags && post.data.tags.map((tag: any, i: any) => <Topic key={i}>{tag}</Topic>)}
+          <h1 className={`${barlow.className} text-3xl md:text-5xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
+            {post.data.title}
+          </h1>
+          {post.data.subtitle && (<h2 className={`${barlow.className} text-md md:text-xl mb-2 -mt-3  mb-6 opacity-75`}>
+            {post.data.subtitle}
+          </h2>)}
+          <hr />
+          <div className="text-muted-forground opacity-50 my-6 text-xs">
+            {format(new Date(post.data.publishedDate), 'MMMM do yyyy')} | ~{readingTime(post.content).text}
+          </div>
+          {/* <img src="/sample.jpg" className="rounded-xl" /> */}
+          <div className="content mt-8">
+            {children}
+          </div>
+        </div>
+      </section>
+    </Page>
   )
 }

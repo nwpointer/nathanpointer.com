@@ -11,7 +11,6 @@ import Link from "next/link"
 import { format } from 'date-fns'
 
 export default async function Home() {
-
   const root = "src/app/blog/(posts)"
   const posts = (await Promise.all(
     fs.readdirSync(`${root}`)

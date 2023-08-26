@@ -7,6 +7,9 @@ const fs = require('fs');
 import { log } from "console"
 import { loadPost } from "./loadPost"
 import { format } from 'date-fns'
+
+import Page from "@/components/Page"
+
 export default async function Home() {
   const root = "src/app/blog/(posts)"
   const posts = (await Promise.all(
@@ -20,12 +23,10 @@ export default async function Home() {
     return 0;
   })
 
+
+
   return (
-    <div>
-      <Flourish />
-      <section>
-        <MainNav />
-      </section>
+    <Page>
       <div className="container my-16">
         <h1 className={`${barlow.className} text-3xl md:text-4xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
           POSTS:
@@ -47,6 +48,6 @@ export default async function Home() {
           )}
         </div>
       </div>
-    </div>
+    </Page>
   )
 }
