@@ -4,9 +4,15 @@ import Page from '@/components/Page'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
+import { Topic } from '@/components/Topic';
+import { Barlow } from 'next/font/google'
+const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
+import { format } from 'date-fns'
+import readingTime from 'reading-time'
+import path from 'path';
+
 import { ThemeProvider } from "@/components/theme-provider"
 import { loadPost } from '../loadPost'
-
 
 export const metadata: Metadata = {
   title: 'Create Next App!!',
@@ -14,20 +20,35 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children, ...args }: { children: React.ReactNode }) {
+  // @ts-ignore
   const slug = children?.props?.childProp.segment
   const post = await loadPost(slug);
-  console.log(Object.keys(post))
+  if (!post) return null
   metadata.title = post.slug
-  metadata.description = post?.excerpt
   return (
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Page>
-          <h1 className={`text-3xl md:text-5xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
-          hia
-        </h1>
-            {children}
+            <section >
+              <div className="container my-16 post">
+                {post.data.tags && post.data.tags.map((tag: any, i: any) => <Topic key={i}>{tag}</Topic>)}
+                <h1 className={`${barlow.className} text-3xl md:text-5xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
+                  {post.data.title}
+                </h1>
+                {post.data.subtitle && (<h2 className={`${barlow.className} text-md md:text-xl mb-2 -mt-3  mb-6 opacity-75`}>
+                  {post.data.subtitle}
+                </h2>)}
+                <hr />
+                <div className="text-muted-forground opacity-50 my-6 text-xs">
+                  {format(new Date(post.data.publishedDate), 'MMMM do yyyy')} | ~{readingTime(post.content).text}
+                </div>
+                {/* <img src="/sample.jpg" className="rounded-xl" /> */}
+                <div className="content mt-8">
+                  {children}
+                </div>
+              </div>
+            </section>
           </Page>
         </ThemeProvider>
       </body>
