@@ -23,6 +23,8 @@ export default async function Home() {
     return 0;
   })
 
+  // return null
+
   return (
     <Page>
       <section className="md:min-h-[600px] min-h-[400px] flex items-center">
