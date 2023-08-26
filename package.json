@@ -23,6 +23,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.8.0",
     "lucide-react": "^0.268.0",

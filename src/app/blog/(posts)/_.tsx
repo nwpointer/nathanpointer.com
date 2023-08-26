@@ -10,6 +10,7 @@ import path from 'path';
 
 export default async function Page({ params }: { params: { post: string } }) {
   const post = await loadPost(params.post + ".mdx");
+  console.log(post)
   
   const Mdx = dynamic(
     () => import(`./posts/`+params.post+`.mdx`)

@@ -8,11 +8,12 @@ import { log } from "console"
 import { loadPost } from "./loadPost"
 import { format } from 'date-fns'
 export default async function Home() {
-  const root = "src/app/blog/[post]/posts"
+  const root = "src/app/blog/(posts)"
   const posts = (await Promise.all(
     fs.readdirSync(`${root}`)
-      .map(loadPost)
-  )).sort((a, b) => {
+    .map(loadPost)
+  )).filter((post:any) => !!post)
+  .sort((a, b) => {
     // sorts post by data.publishedDate
     if (a.data.publishedDate < b.data.publishedDate) return -1;
     else if (b.data.publishedDate < a.data.publishedDate) return -1;
