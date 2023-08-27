@@ -160,7 +160,7 @@ diffuseColor = vec4( color.rgb, opacity );
 <b>Limitation:</b> texture tiling results in obvious texture repetition, which we’ll solve using the next technique
 
 ### 05. HIDING TEXTURE REPETITION:
-Although it's easy to do so, nothing requires us to lay down the textures in the type of grid pattern that creates the undesirable tiling effect. Inigo Quilez has a great article on multiple ways of fixing texture repetition, which I used in my scene: https://iquilezles.org/www/articles/texturerepetition/texturerepetition.htm.
+Although it's easy to do so, nothing requires us to lay down the textures in the type of grid pattern that creates the undesirable tiling effect. [Inigo Quilez has a great article on multiple ways of fixing texture repetition](https://iquilezles.org/www/articles/texturerepetition/texturerepetition.htm), which I used in my scene.
 
 To oversimplify, the technique essentially boils down to using a random noise texture and some math to more organically place and blend the texture seamlessly across the surface of the mesh.
 
