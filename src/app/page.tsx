@@ -41,7 +41,7 @@ export default async function Home() {
               I love a good challenge and I find I&apos;m often at my happiest when designing technical solutions to novel problems with an engaged and empowered team of peers.
             </p>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              I live in Portend Oregon with my beautiful girlfriend and our cat Zelda
+              I live in Portland Oregon with my beautiful girlfriend and our cat Zelda
             </p>
             <br />
             {/* <h3 className={` text-nd capitalize mb-2 tracking-wide font-semibold`}>Interests:</h3> */}
