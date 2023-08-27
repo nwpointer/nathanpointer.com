@@ -1,9 +1,5 @@
-import { Flourish } from "@/components/Flourish"
-import { MainNav } from "@/components/MainNav"
 import Page from "@/components/Page"
-import { Button } from "@/components/ui/button"
-import { Roboto_Mono, Barlow } from 'next/font/google'
-const robo = Roboto_Mono({ subsets: ['latin'], weight: ['300'] })
+import { Barlow } from 'next/font/google'
 const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
 const fs = require('fs');
 import { loadPost } from "./blog/loadPost"
@@ -22,8 +18,6 @@ export default async function Home() {
     else if (b.data.publishedDate < a.data.publishedDate) return -1;
     return 0;
   })
-
-  // return null
 
   return (
     <Page>
@@ -47,7 +41,7 @@ export default async function Home() {
               I love a good challenge and I find I&apos;m often at my happiest when designing technical solutions to novel problems with an engaged and empowered team of peers.
             </p>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              I live in Portand Oregon with my beautiful girlfriend and our cat Zelda
+              I live in Portend Oregon with my beautiful girlfriend and our cat Zelda
             </p>
             <br />
             {/* <h3 className={` text-nd capitalize mb-2 tracking-wide font-semibold`}>Interests:</h3> */}
