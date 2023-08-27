@@ -122,7 +122,7 @@
 
 code {
   @apply rounded-lg border mb-2 ;
-  @apply max-w-4xl w-fit min-w-full;
+  /* @apply max-w-4xl w-fit min-w-full; */
 }
 
 pre + p {
