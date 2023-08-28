@@ -17,6 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"></link>
       </head>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDEZNQZS8N"></script>
+      <script src="/analytics.js"></script>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
