@@ -1,70 +1,70 @@
 ---
 title: Choosing Between Svelte and React in 2023
-subtitle: A Comprehensive Comparison
+subtitle: A Quick Comparison
 publishedDate: 2023/08/27
 ---
 
 <img className="rounded-xl w-full mb-4" src="/25+The+Punch.png" />
 
-As js developer trying to choose a framework in 2023 we are spoiled for choice but choosing the right front-end framework is crucial for creating efficient, maintainable, and visually appealing user interfaces. Svelte and React have emerged as two prominent contenders, each with its own unique features and benefits.
+As web developers trying to choose a framework in 2023 we are spoiled for choice but choosing the right front-end framework is crucial for creating efficient, maintainable, and visually appealing experiences for your users. By comparing Svelte vs. React we stand to learn which approach is best for your next project and build a better understanding of both frameworks. 
 
+Do new advancements such as server components change which framework you should use?
 ### TLDR
-- Svelte's build-time compilation for performance and faster load times are a compelling reason to switch from React. 
-- React offers a familiar hook & component-based structure with a vast ecosystem, whereas Svelte's simpler syntax suits newcomers. 
-- React has varied state management options, and Svelte integrates state management using reactive variables and stores. 
-- React's established community provides extensive resources, but Svelte's community is growing and enthusiastic. 
-- React suits diverse project sizes, while Svelte excels in performance-driven projects.
+*   Svelte's all-in-one approach is easy to learn or pick up
+    
+*   Svelte's build-time compilation for performance and faster load times are a compelling reason to switch from React.
+    
+*   React offers a familiar hook & component-based structure with a vast ecosystem, whereas Svelte's simpler syntax suits newcomers or those looking for more integrated solutions.
+    
+*   React has varied state management options, whereas Svelte integrates state management using reactive variables and stores.
+    
+*   React's established community provides extensive resources, but Svelte's community is growing and enthusiastic.
+    
+For more details read on:
+### Understanding Svelte And React
+Introducing our contenders...
+#### React is the incumbent:
+React has remained a dominant force in the front-end development landscape since its release in 2013. React is known for its component-based architecture, virtual dom, and a large and active community that has contributed to a vast ecosystem of libraries, tools, resources, and is probably what your team is already using.
+docs: [https://react.dev/](https://react.dev/)
+#### The case for Svelte:
+Svelte is a relatively new entrant in the world of front-end frameworks. Introduced in 2016 by Rich Harris, Svelte follows a different approach compared to traditional frameworks like React, Angular, and Vue. Unlike these frameworks, Svelte shifts much of its work from runtime to build-time. This means that Svelte compiles components into highly optimized JavaScript code during the build process, resulting in faster load times and improved performance.
+docs: [https://svelte.dev/docs/introduction](https://svelte.dev/docs/introduction)
+### Performance
+When it comes to performance, Svelte has a distinct edge. The build-time compilation approach that attracts most React developers to Svelte results in smaller bundle sizes and faster load times compared to React. Svelte's compiled output is highly optimized, which can lead to better runtime performance, especially on mobile devices and slower network connections. 
 
-If your mind is still not made up read on:
-
-### Understanding Svelte and React
-
-#### Svelte:
-Svelte is a relatively new entrant in the world of front-end frameworks. Introduced in 2016, Svelte follows a different approach compared to traditional frameworks like React, Angular, and Vue. Unlike these frameworks, Svelte shifts much of its work from runtime to build-time. This means that Svelte compiles components into highly optimized JavaScript code during the build process, resulting in faster load times and improved performance.
-
-docs: https://svelte.dev/docs/introduction
-
-#### React:
-React has remained a dominant force in the front-end development landscape since its release in 2013. React is known for its component-based architecture, virtual DOM, and a large and active community that has contributed to a vast ecosystem of libraries, tools, resources, and is probably what your team is already using.
-
-docs: https://legacy.reactjs.org/docs/getting-started.html
-
-### Performance:
-
-When it comes to performance, Svelte has a distinct edge. The build-time compilation approach of Svelte results in smaller bundle sizes and faster load times compared to React. Svelte's compiled output is highly optimized, which can lead to better runtime performance, especially on mobile devices and slower network connections. React, on the other hand, relies on a virtual DOM diffing algorithm, which can sometimes result in unnecessary computations.
-
+React, on the other hand, relies on a document object model diffing algorithm, which can sometimes result in unnecessary computations. This means that for dynamic user interfaces, svelte apps may still have a slight edge over other frameworks even when accounting for React’s newer features such as server components.
 ### Learning Curve:
+Both systems use a component-based architecture which by now should be familiar to most frontend developers. The React community is extensive, offering numerous tutorials, courses, and documentation resources.
 
-React's component-based architecture has become familiar to many developers, making it relatively easier to transition from other frameworks or libraries. The React community is extensive, offering numerous tutorials, courses, and documentation resources.
-
-Svelte, though simpler in some respects, might present a steeper learning curve for developers who are used to traditional frameworks. However, Svelte's syntax closely resembles standard HTML, CSS, and JavaScript, making it more approachable for newcomers to web development.
-
-### Ecosystem and Libraries:
-
-React boasts a massive ecosystem of third-party libraries, tools, and extensions. This extensive collection addresses a wide range of use cases, from state management (Redux, MobX) to routing (React Router) and UI components (Material-UI, Ant Design).
+Svelte's more integrated approach, though simpler in some respects, might require a change of perspective for developers who are using React. However, Svelte's syntax closely resembles standard HTML, CSS, and JavaScript, making it easier to pick up than one might expect.
+### Ecosystem And Libraries:
+Having been around longer React boasts a massive ecosystem of third-party libraries, tools, and extensions. This extensive collection addresses a wide range of use cases, from state management (Redux, MobX) to routing (React Router) and UI components (Material-UI, Ant Design).
 
 Svelte's ecosystem is smaller in comparison but growing rapidly. While it might not have the same breadth as React's ecosystem, Svelte's simplicity and performance benefits can make up for this. Svelte also has its own set of libraries and tools, such as SvelteKit for building applications and stores for state management.
-
 ### State Management:
-
 State management is a critical aspect of web applications, especially as they grow in complexity. React has a variety of state management solutions, including its built-in Context API and third-party libraries like Redux and MobX.
 
-Svelte's approach to state management is more integrated, utilizing reactive variables and stores. While this might simplify state management for smaller projects, the lack of a unified approach across the ecosystem might be a concern for larger applications.
+Unlike react Svelte's approach to state management is more integrated, utilizing truly reactive variables and stores. While this might simplify state management for smaller projects, the lack of choice might be a concern for enterprise applications or unusual data challenges.
+### Meta frameworks:
+Meta frameworks sometimes called app frameworks help create user interfaces faster by adding routing, performance features, and typically some sort of easy-to-use build system.
 
-### Community and Support:
+Here I think React has a bit of an advantage - React has next.js and several other options that are feature-rich and a breeze to deploy. Svelte's meta-framework Sveltekit is coming along though and has some great docs so it should be easy to pick up.
+### Rendering modes:
+Both frameworks support static and server-side rendering but React here has a slight edge in my mind with the introduction of server components. Server components are rendered server-side like with traditional SSR but importantly they skip shipping js to the client when it's not needed.
 
+This means you can do extraordinary things like safely query databases or read the file system in your server components unlocking new ways to build dynamic user interfaces.
+### Community And Support:
 React's community is well-established and vibrant, with a wealth of resources available online. This community support ensures that developers can find solutions to problems quickly and can easily share knowledge.
 
 Svelte's community is younger but enthusiastic, and it's been growing steadily. While it might not have reached the same scale as React's community, Svelte's rising popularity suggests that it's becoming a viable choice for many developers.
+### Project Scope And Requirements:
+The choice between Svelte and React also depends on the specifics of your project. For smaller projects or prototypes, where performance might not be a primary concern, React's familiarity and extensive ecosystem could provide advantages.
 
-### Project Scope and Requirements:
-
-The choice between Svelte and React also depends on the specifics of your project. For smaller projects or prototypes, where performance might not be a primary concern, React's familiarity and extensive ecosystem could provide advantages. On the other hand, for projects that demand optimal performance and faster load times, Svelte's compilation approach could be more suitable.
-
-If you have a small team and need the performance improvements svelte becomes the clear winner. If you are in a large organization or have a large body of existing react.js code, the cost of refactoring and training may not pencil out.
+On the other hand, for projects that demand optimal performance and faster load times, Svelte's compilation approach could be more suitable.
+If you have a small team or need performance improvements svelte becomes the clear winner. If you are in a large organization or have a large body of existing react.js code, the cost of refactoring and training may not pencil out.
 
 ### Conclusion:
-
 In the landscape of front-end development in 2023, choosing between Svelte and React depends on various factors such as performance requirements, project scope, development team familiarity, and ecosystem preferences. React's established position, extensive ecosystem, and ease of adoption make it a safe bet for many projects. On the other hand, Svelte's performance-oriented approach and simplified syntax offer a compelling alternative, especially for projects that prioritize speed and efficiency.
 
-As both frameworks continue to evolve, it's essential to stay informed about their latest developments and trends within the web development community. Ultimately, the choice between Svelte and React should be based on a careful assessment of your project's unique needs and objectives.
+As both frameworks continue to evolve, it's essential to stay informed about their latest developments and trends within the web development community. As always the best way to figure out which web framework is right for you is just to build more apps but hope this was helpful and saved you some time researching.
+
