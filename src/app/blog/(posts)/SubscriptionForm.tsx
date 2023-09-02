@@ -11,7 +11,7 @@ function getCookie(name:string) {
   if (parts && parts.length === 2) return parts.pop().split(';').shift();
 }
 
-export function SubscriptionForm({subscribe, ...props}: {subscribe?: Function} & React.HTMLAttributes<HTMLDivElement>) {
+export function SubscriptionForm( {...props}: React.HTMLAttributes<HTMLDivElement>) {
   const [message, setMessage] = useState<string | undefined>('')
   const [error, setError] = useState<string | undefined>('')
   const [subscribed, setSubscribed] = useState<boolean>(false)
@@ -21,6 +21,14 @@ export function SubscriptionForm({subscribe, ...props}: {subscribe?: Function} &
       setSubscribed(true)
     }
   }, [])
+
+  const subscribe = async (formData: FormData) => {
+    const response = await fetch('/api/subscribe', {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+    return  await response.json()
+  }
 
   const onSubmit = async (formData: FormData) => {
     if(subscribe){

@@ -28,11 +28,6 @@ export default async function RootLayout({ children, ...args }: { children: Reac
   const posts = await getPosts();
   const relatedPosts = [posts[0], posts[1], posts[2]]
 
-  const subscribe = async (email: string) => {
-    'use server';
-    console.log('hia')
-  }
-
   return (
     <Page>
       <section >
@@ -53,7 +48,7 @@ export default async function RootLayout({ children, ...args }: { children: Reac
             {children}
           </div>
           
-          <SubscriptionForm subscribe={subscribe} className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
+          <SubscriptionForm className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
 
           {relatedPosts && (
             <div className="my-24">
