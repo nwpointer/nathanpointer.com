@@ -3,7 +3,7 @@
 // import { v4 as uuid } from 'uuid';
 // import { cookies } from 'next/headers'
 
-export async function subscribe(formData: any) : Promise<{error?: string, message?: string}> {
+export default async function subscribe(formData: any) : Promise<{error?: string, message?: string}> {
   return { message: 'Thanks for subscribing! 🎉'}
   // try {
   //   const email = formData.get("email");
