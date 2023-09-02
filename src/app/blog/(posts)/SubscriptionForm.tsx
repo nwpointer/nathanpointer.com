@@ -23,11 +23,11 @@ export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
     }
   }, [])
 
-  // const onSubmit = async (formData: FormData) => {
-  //   const {error, message} = await subscribe(formData);
-  //   if (error) setMessage(error)
-  //   if (message) setMessage(message)
-  // }
+  const onSubmit = async (formData: FormData) => {
+    const {error, message} = await subscribe(formData);
+    if (error) setMessage(error)
+    if (message) setMessage(message)
+  }
 
   if(subscribed) return null
 
