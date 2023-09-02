@@ -1,1 +1,5 @@
-{}
+{
+    "experimental": {
+        "serverActions": true
+    }
+}
