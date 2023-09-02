@@ -9,7 +9,7 @@ const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
 import { format } from 'date-fns'
 import readingTime from 'reading-time'
 import { loadPost, getPosts } from '../loadPost'
-// import { SubscriptionForm } from './SubscriptionForm'
+import { SubscriptionForm } from './SubscriptionForm'
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ export default async function RootLayout({ children, ...args }: { children: Reac
             {children}
           </div>
           
-          {/* <SubscriptionForm className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" /> */}
+          <SubscriptionForm className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
 
           {relatedPosts && (
             <div className="my-24">
