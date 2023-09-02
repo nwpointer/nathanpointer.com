@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nathanpointer.com
+
+# Sitemaps
+Sitemap: https://nathanpointer.com/sitemap.xml
