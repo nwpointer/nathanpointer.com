@@ -2,7 +2,7 @@
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { subscribe } from "./subscribe";
+// import { subscribe } from "./subscribe";
 import { useEffect, useState } from 'react';
 
 function getCookie(name:string) {
@@ -12,7 +12,7 @@ function getCookie(name:string) {
   if (parts && parts.length === 2) return parts.pop().split(';').shift();
 }
 
-export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
+export function SubscriptionForm({subscribe, ...props}: {subscribe?: Function} & React.HTMLAttributes<HTMLDivElement>) {
   const [message, setMessage] = useState<string | undefined>('')
   const [error, setError] = useState<string | undefined>('')
   const [subscribed, setSubscribed] = useState<boolean>(false)
@@ -23,18 +23,20 @@ export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
     }
   }, [])
 
-  // const onSubmit = async (formData: FormData) => {
-  //   const {error, message} = await subscribe(formData);
-  //   if (error) setMessage(error)
-  //   if (message) setMessage(message)
-  // }
+  const onSubmit = async (formData: FormData) => {
+    if(subscribe){
+      const {error, message} = await subscribe(formData);
+      if (error) setMessage(error)
+      if (message) setMessage(message)
+    }
+  }
 
   if(subscribed) return null
 
   return (<div {...props}>
     <h4>like what you read?</h4>
     <p className="text-sm">subscribe to my newsletter to get notified when I post new content!</p>
-    {/* <form action={onSubmit}>
+    <form action={onSubmit}>
       <div  className="flex w-full max-w-sm items-center space-x-2 mt-6">
         <Input required id="name" name="email" type="email" placeholder="Email" />
         <SubmitButton />
@@ -43,7 +45,7 @@ export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
         { message && <div className='text-sm mt-3 text-muted-foreground'>{message}</div>}
         { error && <div className='text-sm text-red-400 mt-3'>{error}</div>}
       </Resolved>
-    </form> */}
+    </form>
   </div>);
 }
 
