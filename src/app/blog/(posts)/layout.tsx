@@ -11,7 +11,7 @@ import readingTime from 'reading-time'
 import { loadPost, getPosts } from '../loadPost'
 import { SubscriptionForm } from './SubscriptionForm'
 import Link from 'next/link';
-import subscribe from "./actions";
+// import subscribe from "./actions";
 
 export const metadata: Metadata = {
   title: 'Nathan Pointer',
@@ -27,6 +27,10 @@ export default async function RootLayout({ children, ...args }: { children: Reac
 
   const posts = await getPosts();
   const relatedPosts = [posts[0], posts[1], posts[2]]
+
+  const subscribe = async (email: string) => {
+    console.log('hia')
+  }
 
   return (
     <Page>
