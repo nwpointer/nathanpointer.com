@@ -11,7 +11,7 @@ import readingTime from 'reading-time'
 import { loadPost, getPosts } from '../loadPost'
 import { SubscriptionForm } from './SubscriptionForm'
 import Link from 'next/link';
-import { subscribe } from "./subscribe";
+import subscribe from "./actions";
 
 export const metadata: Metadata = {
   title: 'Nathan Pointer',
