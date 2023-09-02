@@ -2,7 +2,6 @@
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import { subscribe } from "./subscribe";
 import { useEffect, useState } from 'react';
 
 function getCookie(name:string) {
