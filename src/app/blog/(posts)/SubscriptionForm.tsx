@@ -25,9 +25,9 @@ export function SubscriptionForm( {...props}: React.HTMLAttributes<HTMLDivElemen
   const subscribe = async (formData: FormData) => {
     const response = await fetch('/api/subscribe', {
       method: 'POST',
-      body: JSON.stringify(formData)
+      body: JSON.stringify({email: formData.get('email')})
     })
-    return  await response.json()
+    return await response.json()
   }
 
   const onSubmit = async (formData: FormData) => {
