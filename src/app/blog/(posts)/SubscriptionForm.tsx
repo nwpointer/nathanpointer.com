@@ -31,7 +31,7 @@ export function SubscriptionForm({subscribe, ...props}: {subscribe?: Function} &
     }
   }
 
-  if(subscribed) return null
+  // if(subscribed) return null
 
   return (<div {...props}>
     <h4>like what you read?</h4>

@@ -11,6 +11,7 @@ import readingTime from 'reading-time'
 import { loadPost, getPosts } from '../loadPost'
 import { SubscriptionForm } from './SubscriptionForm'
 import Link from 'next/link';
+import { subscribe } from "./subscribe";
 
 export const metadata: Metadata = {
   title: 'Nathan Pointer',
@@ -47,7 +48,7 @@ export default async function RootLayout({ children, ...args }: { children: Reac
             {children}
           </div>
           
-          <SubscriptionForm className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
+          <SubscriptionForm subscribe={subscribe} className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
 
           {relatedPosts && (
             <div className="my-24">
