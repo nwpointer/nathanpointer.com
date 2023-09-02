@@ -229,7 +229,8 @@ Ideally the scene would benefit from both the macroscopic cliff face normal as w
 Stephen Hill has a really good summary of the problem and potential solutions. It adds some complexity to the shader but it's worth it in my opinion: <a href="https://blog.selfshadow.com/publications/blending-in-detail/">https://blog.selfshadow.com/publications/blending-in-detail/</a>
 
 ```js
-// adapted from original article so more than two normals can be blended
+// adapted from original article so more than two normals
+// can be blended
 vec4 blend_normals(vec4 n1, vec4 n2){
     vec3 t = n1.xyz*vec3( 2,  2, 2) + vec3(-1, -1,  0);
     vec3 u = n2.xyz*vec3(-2, -2, 2) + vec3( 1,  1, -1);

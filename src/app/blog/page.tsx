@@ -5,25 +5,14 @@ import { Barlow } from 'next/font/google'
 const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
 const fs = require('fs');
 import { log } from "console"
-import { loadPost } from "./loadPost"
+import { loadPost, getPosts } from "./loadPost"
 import { format } from 'date-fns'
 
 import Page from "@/components/Page"
 
 export default async function Home() {
   const root = "src/app/blog/(posts)"
-  const posts = (await Promise.all(
-    fs.readdirSync(`${root}`)
-    .map(loadPost)
-  )).filter((post:any) => !!post)
-  .sort((a, b) => {
-    // sorts post by data.publishedDate
-    if (a.data.publishedDate < b.data.publishedDate) return -1;
-    else if (b.data.publishedDate < a.data.publishedDate) return -1;
-    return 0;
-  })
-
-
+  const posts = await getPosts()
 
   return (
     <Page>

@@ -1,18 +1,18 @@
 import '../../globals.css'
 import type { Metadata } from 'next'
+
 import Page from '@/components/Page'
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] })
 
 import { Topic } from '@/components/Topic';
 import { Barlow } from 'next/font/google'
 const barlow = Barlow({ subsets: ['latin'], weight: ['400', '600'] })
 import { format } from 'date-fns'
 import readingTime from 'reading-time'
-import path from 'path';
-
-import { ThemeProvider } from "@/components/theme-provider"
-import { loadPost } from '../loadPost'
+import { loadPost, getPosts } from '../loadPost'
+import { kv } from "@vercel/kv";
+import { SubscriptionForm } from './SubscriptionForm'
+import { cookies } from 'next/headers'
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Create Next App!!',
@@ -25,6 +25,10 @@ export default async function RootLayout({ children, ...args }: { children: Reac
   const post = await loadPost(slug);
   if (!post) return null
   metadata.title = post.slug
+
+  const posts = await getPosts();
+  const relatedPosts = [posts[0], posts[1], posts[2]]
+
   return (
     <Page>
       <section >
@@ -44,8 +48,37 @@ export default async function RootLayout({ children, ...args }: { children: Reac
           <div className="content mt-8">
             {children}
           </div>
+          
+          <SubscriptionForm className="content my-12 border bg-gray-50 dark:border-blue-500 rounded-xl p-6 dark:bg-blue-500 dark:bg-opacity-20 dark:border-opacity-60" />
+
+          {relatedPosts && (
+            <div className="my-24">
+              <h3 className={`${barlow.className} text-2xl md:text-4xl capitalize mb-2 font-bold -tracking-tighter mb-6`}>
+                Related Posts
+              </h3>
+              <div className="md:grid grid-cols-3 gap-4">
+                {relatedPosts.map(({ slug, data, excerpt }: any, i: any) =>
+                  <div className='border p-4 rounded-xl mb-4 hover:shadow-md transition-shadow' key={i}>
+                    {/* <div className="text-xs text-muted-foreground mb-2">{format(new Date(data.publishedDate), 'MMMM do yyyy')}</div> */}
+                    <Link href={`/blog/${slug}`}>
+                      <div className="block mb-2 text-md mt-2" >
+                        {data.title}
+                      </div>
+
+                      <p className="pb-4 text-sm text-muted-foreground content">
+                        {excerpt}
+                      </p>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+            
         </div>
       </section>
     </Page>
   )
-}
+} 
+
+

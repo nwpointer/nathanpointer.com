@@ -121,7 +121,7 @@
 }
 
 code {
-  @apply rounded-lg border mb-2 ;
+  @apply rounded-lg border mb-2 text-xs md:text-sm;
   /* @apply max-w-4xl w-fit min-w-full; */
 }
 

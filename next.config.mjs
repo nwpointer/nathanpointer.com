@@ -9,6 +9,9 @@ import createMDX from '@next/mdx'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    experimental: {
+      serverActions: true,
+    },
     // output: 'export',
 }
  
@@ -19,6 +22,6 @@ const withMDX = createMDX({
     rehypePlugins: [rehypeHighlight, rehypeExtractExcerpt],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",
-  },
+  }
 })
 export default withMDX(nextConfig)
