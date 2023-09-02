@@ -1,4 +1,3 @@
-'use server';
 import { sql } from "@vercel/postgres";
 import { v4 as uuid } from 'uuid';
 import { cookies } from 'next/headers'
