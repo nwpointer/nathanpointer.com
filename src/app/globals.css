@@ -64,7 +64,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
-    --bottom-fade: radial-gradient(circle farthest-corner at center center, #0477c425 0%, #00000000 100%)
+    --bottom-fade: radial-gradient(circle farthest-corner at center center, #0477c435 0%, #00000000 100%)
   }
 }
 
