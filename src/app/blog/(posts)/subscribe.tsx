@@ -1,10 +1,9 @@
-
+'use server';
 import { sql } from "@vercel/postgres";
 import { v4 as uuid } from 'uuid';
 // import { cookies } from 'next/headers'
 
 export async function subscribe(formData: any) : Promise<{error?: string, message?: string}> {
-  'use server';
   try {
     const email = formData.get("email");
     const subscriberId = uuid();
