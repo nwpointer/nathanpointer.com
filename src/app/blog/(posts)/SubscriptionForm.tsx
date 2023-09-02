@@ -22,10 +22,14 @@ export function SubscriptionForm( {...props}: React.HTMLAttributes<HTMLDivElemen
     }
   }, [])
 
+  // manual form submission
   const subscribe = async (formData: FormData) => {
+    var data = {};
+    // @ts-ignore
+    formData.forEach((value, key) => data[key] = value);
     const response = await fetch('/api/subscribe', {
       method: 'POST',
-      body: JSON.stringify({email: formData.get('email')})
+      body: JSON.stringify(data),
     })
     return await response.json()
   }
