@@ -2,7 +2,7 @@
 import { experimental_useFormStatus as useFormStatus } from 'react-dom'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { subscribe } from "./subscribe";
+// import { subscribe } from "./subscribe";
 import { useEffect, useState } from 'react';
 
 function getCookie(name:string) {
@@ -23,11 +23,11 @@ export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
     }
   }, [])
 
-  const onSubmit = async (formData: FormData) => {
-    const {error, message} = await subscribe(formData);
-    if (error) setMessage(error)
-    if (message) setMessage(message)
-  }
+  // const onSubmit = async (formData: FormData) => {
+  //   const {error, message} = await subscribe(formData);
+  //   if (error) setMessage(error)
+  //   if (message) setMessage(message)
+  // }
 
   // if(subscribed) return null
 
