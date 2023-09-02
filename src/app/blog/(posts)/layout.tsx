@@ -29,6 +29,7 @@ export default async function RootLayout({ children, ...args }: { children: Reac
   const relatedPosts = [posts[0], posts[1], posts[2]]
 
   const subscribe = async (email: string) => {
+    'use server';
     console.log('hia')
   }
 
