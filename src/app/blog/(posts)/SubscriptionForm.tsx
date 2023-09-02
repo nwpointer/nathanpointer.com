@@ -29,7 +29,7 @@ export function SubscriptionForm(props: React.HTMLAttributes<HTMLDivElement>) {
   //   if (message) setMessage(message)
   // }
 
-  // if(subscribed) return null
+  if(subscribed) return null
 
   return (<div {...props}>
     <h4>like what you read?</h4>
