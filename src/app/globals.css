@@ -163,7 +163,8 @@ h3{
 }
 
 .post a {
-  @apply text-blue-400
+  @apply text-blue-400;
+  word-wrap: break-word;
 }
 
 .post h4 {
