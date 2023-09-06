@@ -1,0 +1,77 @@
+---
+title: Stop pushing pixels, Convert figma designs to react components quickly
+subtitle: a summary of available automatic design export methods for figma
+publishedDate: 2023/09/05
+tags:
+  - Design
+---
+
+<img className="rounded-xl w-full mb-4" src="/63a13ab3f687d7218cbba3f6_image-from-rawpixel-id-3283994-jpeg.jpg" />
+
+### There are a couple of different ways to export designs from Figma to React components.
+
+Historically the handoff between designers and frontend developers has been a bit of a pain point. Designers would create designs in Figma, or other tools like photoshop and then developers would have to recreate the designs in code. This process was time-consuming and error-prone and required a a lot of back and forth between the two teams.
+
+While I wouldn't necessarily say that is a solved problem modern design tools like figma make it much easier to stay in sync due to their component based workflows and ability to automatically generate fairly usable HTML & CSS or even tailwind if thats your thing.
+
+### The best to export to react is now built right into into figma.
+
+A small cottage industry sprung up around the need to export designs from figma to react components. At the recent figma config conference the figma team announced that they were working on a built-in solution to this problem. This is great news for designers and developers alike as it will make it much easier to stay in sync.
+
+#### 1. Open the figma file & Enter developer mode
+If yu dont have one handy you can use the one I created for this tutorial: [link]
+The new developer mode is available at the upper right hand corner of the figma interface.
+
+#### 3. Select the component you want to export
+If your component is nested inside of other components you can cmd-click to quickly select it by passing its parenet components.
+
+#### 4. Click the copy code button
+In the right hand side bar you'll see export options
+
+#### 4. Disrupt
+magic presto you have quicly exported a react component
+
+### Theres also a VS code plugin
+If you'd perfer to stay in your editor of choice there is also a VS code plugin that will allow you to export components from figma to react. You can find it here: [link]
+
+Its fairly handy and the interface is a convienent if your low on screen real estate but provides essentially the same functionality as the built in figma export.
+
+I'm hoping in futre versions they makie it more convienent to export images etc as this takes a couple more clicks than I'd like.
+
+CoderOne recently published a great video on the new export feature and vs code plugin which you can find here: <iframe width="560" height="315" src="https://www.youtube.com/embed/sNK-cPmnx94?si=WK1B0eJTxMXmKpVl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+### Limitations
+This process is obviously a one way export - Im not sure if im the only one who wants this but my ideal workflow would be bi-directional. For example If I refactor some css or make some visual changes to the site this would be reflected in Figma.
+
+You also won't get atomatic updates if the design changes so this works for workflows where the design is fairly static but if you are iterating quickly on the design you'll need to re-export the component multiple times.
+
+### 3rd party solutions
+There are a couple of 3rd party solutions that will allow you to export designs from figma to react components. I haven't used any of these but they seem to be fairly popular.
+
+#### 1. Quest ai: a full stack ai enhanced solution
+Quest ai is more opinionated but also much more fully featured than the built in figma export. 
+It can export deployable next.js sites or individual react components with ai generated logic for submitign forms etc.
+If you don't have a figma file yet it can also generate components from a napkin sketch. 
+Its a very ambitious and interesting project, and because its making decisions about the full process from design to deployment it might not it everyones workflow but I'm excited to see where they go with it.
+
+- figma plugin: https://www.figma.com/community/plugin/862039267149408972/Figma-to-React-from-Quest
+- website: https://quest.ai/
+<br/>
+#### 2. Anima: simple but better
+Aninma is actually a plugin integrated into the figma devleoper mode I mentioned earlier but is a bit more fully featured than the built in export. 
+It can export full components & pages instead of just JSX and lets you open your components in code sandbox which is pretty convienent.
+My one gripe is that it doesn't seem to support tailwind out of the box which is my preferred css framework but otherwise looks like a really polished version of the built in export options and definetly woth taking a look:
+
+- figma plugin: https://www.figma.com/community/plugin/857346721138427857/Anima---Figma-to-React%2C-HTML-(React%2C-HTML-in-DevMode)
+- website: https://www.animaapp.com/
+<br/>
+#### 3. Copy cat: happy medium?
+If im being honest it was mostly the cat logo that drew me to this one but it looks like a pretty solid option that could strike a good balance between the simplicity of anima and the full stack approach of quest.
+It does not integrate with figma developer mode but instead has its own interface for exporting components inside figma.
+The thing I liked most about it is apparently it works with your existing components / frameworks when generating code so seems like it is less opinonated than quest which kinda just wants to do everything for you.
+
+- wesbite: https://www.copycat.dev/figma-code
+
+### Conclusion
+Right now Figma has the best export options of any of the new wave of online design tools. Really exited to see where figma goes with the dev mode and how it evolves over time. I think it will be a huge time saver for designers and developers alike and will help to keep teams in sync. I'm also excited to see how the 3rd party solutions evolve and how they differentiate themselves from the built in export. Thanks for reading!
