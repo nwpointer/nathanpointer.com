@@ -43,7 +43,11 @@ export default async function RootLayout({ children, ...args }: { children: Reac
           <div className="text-muted-forground opacity-50 my-6 text-xs">
             {format(new Date(post.data.publishedDate), 'MMMM do yyyy')} | ~{readingTime(post.content).text}
           </div>
-          {/* <img src="/sample.jpg" className="rounded-xl" /> */}
+          {post.data.hero && (
+          <div className='max-h-96 rounded-xl flex items-center mb-12 overflow-hidden'>
+            <img src={post.data.hero} className="" />
+          </div>
+          )}
           <div className="content mt-8">
             {children}
           </div>
